@@ -4,28 +4,31 @@ using UnityEngine;
 
 public class UIManager : SingletonMonoBehaviour<UIManager>
 {
-
-    private static UIManager instance;
-
     private UIState currentState;
 
     private List<BaseUI> UIs;
 
+    #region Stack UI
     [SerializeField] private StackUI stackUI;
     [HideInInspector] public StackGameUI stackGameUI;
     [SerializeField] private StackGameOverUI stackGameOverUI;
+    #endregion StackUI
 
     [SerializeField] private GameObject leftUI;
+    [SerializeField] private RankUI rankUI;
+
 
     protected override void Initialize()
     {
         stackUI.Init();
         stackGameOverUI.Init();
+        rankUI.Init();
 
         UIs = new List<BaseUI>();
 
         UIs.Add(stackUI);
         UIs.Add(stackGameOverUI);
+        UIs.Add(rankUI);
 
         ChangeState(UIState.None);
     }

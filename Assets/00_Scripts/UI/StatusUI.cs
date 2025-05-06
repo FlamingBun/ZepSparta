@@ -18,11 +18,6 @@ public class StatusUI : MonoBehaviour
         DataManager.Instance.AddPointChangeEvent(ChangePoint);
     }
 
-    private void OnDisable()
-    {
-
-    }
-
     private void ChangePoint(int point)
     {
         pointText.text = $"내 포인트: {point}";

@@ -30,11 +30,11 @@ public class StackGameOverUI : BaseUI
     private void SetStackScore()
     {
         DataManager dataManager = DataManager.Instance;
-        bestScore.text = $"최고 점수: {dataManager.BestScore}";
-        bestCombo.text = $"최고 콤보: {dataManager.BestCombo}";
+        bestScore.text = $"최고 점수: {dataManager.StackBestScore}";
+        bestCombo.text = $"최고 콤보: {dataManager.StackBestCombo}";
 
-        currentScore.text = $"현재 점수: {dataManager.CurrentScore}";
-        currentCombo.text = $"현재 콤보: {dataManager.CurrentCombo}";
+        currentScore.text = $"현재 점수: {dataManager.StackCurrentScore}";
+        currentCombo.text = $"현재 콤보: {dataManager.StackCurrentCombo}";
 
         getPoint.text = $"획득 포인트: {dataManager.CurrentAddPoint}";
     }

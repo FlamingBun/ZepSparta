@@ -25,19 +25,19 @@ public class DataManager : SingletonMonoBehaviour<DataManager>
     #endregion Point
 
     #region Stack Score
-    private int bestScore = 0;
-    public int BestScore { get => bestScore; }
+    private int stackBestScore = 0;
+    public int StackBestScore { get => stackBestScore; }
 
-    private int bestCombo = 0;
-    public int BestCombo { get => bestCombo; }
+    private int stackBestCombo = 0;
+    public int StackBestCombo { get => stackBestCombo; }
 
-    private int currentScore = 0;
-    public int CurrentScore { get => currentScore; }
-    private int currentCombo = 0;
-    public int CurrentCombo { get => currentCombo; }
+    private int stackCurrentScore = 0;
+    public int StackCurrentScore { get => stackCurrentScore; }
+    private int stackCurrentCombo = 0;
+    public int StackCurrentCombo { get => stackCurrentCombo; }
 
-    private const string BestScorekey = "BestScore";
-    private const string BestComboKey = "BestCombo";
+    private const string StackBestScorekey = "StackBestScore";
+    private const string StackBestComboKey = "StackBestCombo";
     #endregion Stack Score
 
 
@@ -55,22 +55,22 @@ public class DataManager : SingletonMonoBehaviour<DataManager>
     private void GetStackData()
     {
         // Stack
-        bestScore = PlayerPrefs.GetInt(BestScorekey, 0);
-        bestCombo = PlayerPrefs.GetInt(BestComboKey, 0);
+        stackBestScore = PlayerPrefs.GetInt(StackBestScorekey, 0);
+        stackBestCombo = PlayerPrefs.GetInt(StackBestComboKey, 0);
     }
 
     public void UpdateStackScore(int stackCount, int maxCombo)
     {
-        currentScore = stackCount;
-        currentCombo = maxCombo;
+        stackCurrentScore = stackCount;
+        stackCurrentCombo = maxCombo;
 
-        if (bestScore < stackCount)
+        if (stackBestScore < stackCount)
         {
-            bestScore = stackCount;
-            bestCombo = maxCombo;
+            stackBestScore = stackCount;
+            stackBestCombo = maxCombo;
 
-            PlayerPrefs.SetInt(BestScorekey, bestScore);
-            PlayerPrefs.SetInt(BestComboKey, bestCombo);
+            PlayerPrefs.SetInt(StackBestScorekey, stackBestScore);
+            PlayerPrefs.SetInt(StackBestComboKey, stackBestCombo);
         }
         currentAddPoint = stackCount * 100;
         EarnPoint(currentAddPoint);
@@ -81,6 +81,7 @@ public class DataManager : SingletonMonoBehaviour<DataManager>
         point += addPoint;
         currentAddPoint = addPoint;
         OnChangePoint?.Invoke(point);
+        PlayerPrefs.SetInt(PointKey, point);
     }
 
     public bool SpendPoint(int minusPoint)
