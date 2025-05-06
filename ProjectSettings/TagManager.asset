@@ -12,10 +12,10 @@ TagManager:
   - Water
   - UI
   - 
-  - 
-  - 
-  - 
-  - 
+  - MessageTrigger
+  - Player
+  - Obstacle
+  - NPC
   - 
   - 
   - 
@@ -55,4 +55,7 @@ TagManager:
     locked: 0
   - name: Front
     uniqueID: 4121592225
+    locked: 0
+  - name: WorldUI
+    uniqueID: 3571152259
     locked: 0

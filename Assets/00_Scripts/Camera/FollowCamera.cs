@@ -5,7 +5,7 @@ using UnityEngine;
 public class FollowCamera : MonoBehaviour
 {
     public Transform target;
-    public float followSpeed = 2f;
+    public float followSpeed = 10f;
     public Vector2 minBound = new Vector2(-29, -30);
     public Vector2 maxBound = new Vector2(35, 32);
 

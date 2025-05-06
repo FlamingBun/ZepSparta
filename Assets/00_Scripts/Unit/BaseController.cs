@@ -18,7 +18,6 @@ public class BaseController : MonoBehaviour
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        characterRenderer = GetComponent<SpriteRenderer>();
     }
 
     protected virtual void Start()
