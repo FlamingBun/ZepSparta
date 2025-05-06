@@ -51,7 +51,10 @@ public abstract class MessageTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        messageObject.SetActive(false);
+        if (messageObject != null)
+        {
+            messageObject.SetActive(false);
+        }
 
         PlayerController playerController = other.GetComponent<PlayerController>();
         if (playerController != null)

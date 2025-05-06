@@ -12,7 +12,12 @@ public class FollowCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target == null) return;
+        if (target == null)
+        {
+            if (GameManager.Instance.Player != null)
+                target = GameManager.Instance.Player.transform;
+            else return;
+        }
 
         Vector3 pos = transform.position;
 

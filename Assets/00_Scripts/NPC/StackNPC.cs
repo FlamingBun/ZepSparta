@@ -6,6 +6,6 @@ public class StackNPC : MessageTrigger
 {
     public override void OnClickSpaceBar()
     {
-        Debug.Log("Start Stack");
+        UIManager.Instance.ChangeState(UIState.StackUI);
     }
 }

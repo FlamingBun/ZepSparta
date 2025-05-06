@@ -1,18 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : SingletonMonoBehaviour<GameManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    private static GameManager instance;
+
+
+    private Vector2 currentPosition;
+
+    private GameObject player;
+    public GameObject Player { get { return player; } }
+    [SerializeField] private GameObject playerGameObject;
+
+    protected override void Initialize()
     {
-        
+        currentPosition = Vector2.zero;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        
+        switch (scene.name)
+        {
+            case "MainScene":
+                UIManager.Instance.SetLeftUIActive(true);
+                InitializePlayer();
+                break;
+            case "StackScene":
+                UIManager.Instance.SetLeftUIActive(false);
+                break;
+        }
     }
+
+    public void StackGameOver(int stackCount, int maxCombo)
+    {
+        SceneManager.LoadScene("MainScene");
+        DataManager.Instance.UpdateStackScore(stackCount, maxCombo);
+        UIManager.Instance.ChangeState(UIState.StackGameOverUI);
+    }
+
+    private void InitializePlayer()
+    {
+        player = Instantiate(playerGameObject);
+        player.transform.position = currentPosition;
+    }
+
+    public void StackGameStart()
+    {
+        currentPosition = player.transform.position;
+        SceneManager.LoadScene("StackScene");
+    }
+
+
 }
