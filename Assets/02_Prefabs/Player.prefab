@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 1761483286869419779}
   - component: {fileID: 7924756963042147178}
   - component: {fileID: 669267521852441302}
+  - component: {fileID: 5206038443980441191}
   - component: {fileID: 6728346495081916119}
   m_Layer: 8
   m_Name: Player
@@ -244,6 +245,18 @@ MonoBehaviour:
   gravityScale: 9.8
   jumpPower: 3
   groundOffset: 0
+--- !u!114 &5206038443980441191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4827535678708865339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450d073edcaa3154296912e53cf97f43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6728346495081916119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7837012097837958954}
   - component: {fileID: 1315450280417827112}
+  - component: {fileID: 532896819707499009}
   m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
@@ -358,3 +372,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &532896819707499009
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7578854042213088857}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0b510b8d54fb5ed40b4db00ce77c7317, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
