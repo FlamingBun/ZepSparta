@@ -102,6 +102,7 @@ public class PlayerController : BaseController
         if (isRiding)
         {
             animationHandler.Ride(direction);
+
         }
         else
         {
@@ -152,5 +153,19 @@ public class PlayerController : BaseController
     public void AddSpeedChangeEvent(Action<int> action)
     {
         OnChangeSpeed += action;
+    }
+
+    protected override void Rotate(Vector2 direction)
+    {
+        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        bool isLeft = Mathf.Abs(rotZ) > 90f;
+
+        characterRenderer.flipX = isLeft;
+
+        if (isRiding)
+        {
+            rideRenderer.flipX = isLeft;
+        }
     }
 }

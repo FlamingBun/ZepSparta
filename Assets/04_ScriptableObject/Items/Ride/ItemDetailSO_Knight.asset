@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3199139872111054487783f41278879a, type: 3}
+  m_Name: ItemDetailSO_Knight
+  m_EditorClassIdentifier: 
+  itemId: 21
+  name: "\uAE30\uC0AC"
+  sprite: {fileID: 21300000, guid: 433a74b1ae2f5c844b1e15e4871ca11d, type: 3}
+  itemType: 1
+  price: 1000
+  animator: {fileID: 9100000, guid: c013a305c56ed63469b132bfd80c33ea, type: 2}
+  Health: 0
+  Speed: 3

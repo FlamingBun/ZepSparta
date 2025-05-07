@@ -19,9 +19,12 @@ public class SlotButton : MonoBehaviour
 
     [HideInInspector] public int itemId;
 
+    bool isLookSlot = false;
+
     private ItemSO itemSO;
 
     LookUI lookUI;
+    RideUI rideUI;
 
     public void SetItemInfo(ItemSO _itemSO)
     {
@@ -36,12 +39,22 @@ public class SlotButton : MonoBehaviour
     {
         lookUI = _lookUI;
         slotButton.onClick.AddListener(OnClickItemSlot);
+        isLookSlot = true;
+    }
 
+    public void Initialize(RideUI _rideUI)
+    {
+        rideUI = _rideUI;
+        slotButton.onClick.AddListener(OnClickItemSlot);
+        isLookSlot = false;
     }
 
     private void OnClickItemSlot()
     {
-        lookUI.SelectSlot(itemId);
+        if (isLookSlot)
+            lookUI.SelectSlot(itemId);
+        else
+            rideUI.SelectSlot(itemId);
     }
 
     public void SetFrameActive(bool isSelected)

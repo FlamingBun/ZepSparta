@@ -47,7 +47,7 @@ public class BaseController : MonoBehaviour
         animationHandler.Move(direction);
     }
 
-    private void Rotate(Vector2 direction)
+    protected virtual void Rotate(Vector2 direction)
     {
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
