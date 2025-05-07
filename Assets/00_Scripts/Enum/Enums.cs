@@ -4,7 +4,8 @@ public enum UIState
     StackUI,
     StackGameOverUI,
     RankUI,
-
+    LookUI,
+    RideUI,
 
 }
 
@@ -14,4 +15,10 @@ public enum WarpPoint
     West,
     South,
     North,
+}
+
+public enum ItemType
+{
+    Look,
+    Ride
 }

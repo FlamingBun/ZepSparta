@@ -16,6 +16,8 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
 
     [SerializeField] private GameObject leftUI;
     [SerializeField] private RankUI rankUI;
+    [SerializeField] private LookUI lookUI;
+    [SerializeField] private RideUI rideUI;
 
 
     protected override void Initialize()
@@ -23,12 +25,16 @@ public class UIManager : SingletonMonoBehaviour<UIManager>
         stackUI.Init();
         stackGameOverUI.Init();
         rankUI.Init();
+        lookUI.Init();
+        rideUI.Init();
 
         UIs = new List<BaseUI>();
 
         UIs.Add(stackUI);
         UIs.Add(stackGameOverUI);
         UIs.Add(rankUI);
+        UIs.Add(lookUI);
+        UIs.Add(rideUI);
 
         ChangeState(UIState.None);
     }

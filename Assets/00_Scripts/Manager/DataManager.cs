@@ -3,11 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
+public class ItmeDataPair
+{
+    public int key;
+    public ItemSO itemSO;
+}
+
+[Serializable]
+public class ItemDataWrapper
+{
+    public List<ItmeDataPair> itemList = new();
+}
+
 public class DataManager : SingletonMonoBehaviour<DataManager>
 {
-    private static DataManager instance;
-
-
     #region Status
     private float speed = 3;
 
@@ -40,6 +50,12 @@ public class DataManager : SingletonMonoBehaviour<DataManager>
     private const string StackBestComboKey = "StackBestCombo";
     #endregion Stack Score
 
+
+    #region Items
+    private const string HasItemKey = "HasItems";
+    private const string LookItemKey = "LookItem";
+    private const string RideItemKey = "RideItem";
+    #endregion Items
 
     protected override void Initialize()
     {
@@ -98,6 +114,52 @@ public class DataManager : SingletonMonoBehaviour<DataManager>
             return false;
         }
     }
+
+    public void SaveHasItems(Dictionary<int, ItemSO> hasItems)
+    {
+        ItemDataWrapper wrapper = new();
+
+        foreach (var pair in hasItems)
+        {
+            wrapper.itemList.Add(new ItmeDataPair { key = pair.Key, itemSO = pair.Value });
+        }
+
+        string json = JsonUtility.ToJson(wrapper);
+        PlayerPrefs.SetString(HasItemKey, json);
+        PlayerPrefs.Save();
+    }
+
+    public Dictionary<int, ItemSO> LoadHasItems()
+    {
+        Dictionary<int, ItemSO> hasItems = new Dictionary<int, ItemSO>();
+
+        string json = PlayerPrefs.GetString(HasItemKey);
+
+        if (!string.IsNullOrEmpty(json))
+        {
+            ItemDataWrapper wrapper = JsonUtility.FromJson<ItemDataWrapper>(json);
+
+            foreach (var pair in wrapper.itemList)
+            {
+                hasItems[pair.key] = pair.itemSO;
+            }
+        }
+
+        return hasItems;
+    }
+
+    public void SavePlayerData(int lookId, int rideId)
+    {
+        PlayerPrefs.SetInt(LookItemKey, lookId);
+        PlayerPrefs.SetInt(RideItemKey, rideId);
+    }
+
+    public void LoadPlayerData()
+    {
+        GameManager.Instance.PlayerController.EquipItem(ItemManager.Instance.GetItem(PlayerPrefs.GetInt(LookItemKey)));
+        GameManager.Instance.PlayerController.EquipItem(ItemManager.Instance.GetItem(PlayerPrefs.GetInt(RideItemKey)));
+    }
+
 
     public void AddPointChangeEvent(Action<int> action)
     {

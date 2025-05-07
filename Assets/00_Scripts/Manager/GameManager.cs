@@ -5,14 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
-    private static GameManager instance;
-
-
     private Vector2 currentPosition;
 
+    #region Player
+    [Header("Player")]
     private GameObject player;
     public GameObject Player { get { return player; } }
+
+    private PlayerController playerController;
+    public PlayerController PlayerController { get { return playerController; } }
+
     [SerializeField] private GameObject playerGameObject;
+
+    #endregion Player
 
     protected override void Initialize()
     {
@@ -44,6 +49,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     private void InitializePlayer()
     {
         player = Instantiate(playerGameObject);
+        playerController = player.GetComponent<PlayerController>();
+        playerController.Initialize();
         player.transform.position = currentPosition;
     }
 
@@ -52,6 +59,5 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         currentPosition = player.transform.position;
         SceneManager.LoadScene("StackScene");
     }
-
 
 }

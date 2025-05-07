@@ -5,16 +5,27 @@ using UnityEngine;
 public class AnimationHandler : MonoBehaviour
 {
     private static readonly int IsMoving = Animator.StringToHash("IsMove");
-
-    protected Animator animator;
-
-    protected virtual void Awake()
-    {
-        animator = GetComponentInChildren<Animator>();
-    }
+    private static readonly int IsRiding = Animator.StringToHash("IsRide");
+    [SerializeField] private Animator playerAnimator;
+    [SerializeField] private Animator rideAnimator;
 
     public void Move(Vector2 obj)
     {
-        animator.SetBool(IsMoving, obj.magnitude > .5f);
+        playerAnimator.SetBool(IsMoving, obj.magnitude > .5f);
+    }
+
+    public void Ride(Vector2 obj)
+    {
+        playerAnimator.SetBool(IsMoving, false);
+        rideAnimator.SetBool(IsRiding, obj.magnitude > .5f);
+    }
+
+    public void SetPlayerAnimator(RuntimeAnimatorController _animator)
+    {
+        playerAnimator.runtimeAnimatorController = _animator;
+    }
+    public void SetRideAnimator(RuntimeAnimatorController _animator)
+    {
+        rideAnimator.runtimeAnimatorController = _animator;
     }
 }

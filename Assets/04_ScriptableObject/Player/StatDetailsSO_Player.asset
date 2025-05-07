@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7178b985735606499027539791a3d5a, type: 3}
   m_Name: StatDetailsSO_Player
   m_EditorClassIdentifier: 
+  currentLookItem: {fileID: 11400000, guid: 62a92548bbf0ae740814aa0a29887f71, type: 2}
+  currentRideItem: {fileID: 11400000, guid: 04923e2e503289f45880fcb964dc967b, type: 2}
   Health: 10
   Speed: 3

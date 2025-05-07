@@ -10,7 +10,7 @@ public class RankUI : BaseUI
 
     [SerializeField] private TextMeshProUGUI stackScore;
     [SerializeField] private TextMeshProUGUI stackCombo;
-    [SerializeField] private TextMeshProUGUI runScore;
+    // [SerializeField] private TextMeshProUGUI runScore;
 
     public override void Init()
     {

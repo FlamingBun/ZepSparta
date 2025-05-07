@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using System;
 
 public class PlayerController : BaseController
 {
     private MessageTrigger messageTrigger;
     private bool isOnTrigger = false;
+
+    [SerializeField] protected SpriteRenderer rideRenderer;
 
     [Header("Jump")]
     [SerializeField] private Transform playerTransform;
@@ -20,6 +22,20 @@ public class PlayerController : BaseController
     private float currentJumpPower;
     private bool isGrounded = false;
 
+    [Header("Items")]
+    [SerializeField] private ItemSO lookItem;
+    [SerializeField] private ItemSO rideItem;
+
+    private bool isRiding = false;
+
+    private Action<int> OnChangeSpeed;
+
+    public void Initialize()
+    {
+        isRiding = false;
+
+        DataManager.Instance.LoadPlayerData();
+    }
 
     protected override void FixedUpdate()
     {
@@ -37,7 +53,6 @@ public class PlayerController : BaseController
             isJumping = false;
             playerTransform.position = new Vector2(playerTransform.position.x, shadowTransform.position.y + groundOffset);
         }
-
     }
 
     private void OnMove(InputValue inputValue)
@@ -78,5 +93,64 @@ public class PlayerController : BaseController
         this.currentJumpPower = jumpPower;
         isJumping = true;
         isGrounded = false;
+    }
+
+    protected override void Movement(Vector2 direction)
+    {
+        direction = direction * (statDetailsSO.Speed + rideItem.Speed + lookItem.Speed);
+        _rigidbody.velocity = direction;
+        if (isRiding)
+        {
+            animationHandler.Ride(direction);
+        }
+        else
+        {
+            animationHandler.Move(direction);
+        }
+    }
+
+    public void EquipItem(ItemSO newItem)
+    {
+
+        if (newItem.itemType == ItemType.Look)
+        {
+            lookItem = newItem;
+            characterRenderer.sprite = lookItem.sprite;
+            animationHandler.SetPlayerAnimator(lookItem.animator);
+
+        }
+        else
+        {
+            rideItem = newItem;
+
+            if (newItem.name == "기본")
+            {
+                isRiding = false;
+                groundOffset = 0.0f;
+                rideRenderer.sprite = null;
+            }
+            else
+            {
+                isRiding = true;
+                groundOffset = 0.8f;
+                rideRenderer.sprite = rideItem.sprite;
+            }
+
+            animationHandler.SetRideAnimator(rideItem.animator);
+        }
+
+        DataManager.Instance.SavePlayerData(lookItem.itemId, rideItem.itemId);
+        OnChangeSpeed?.Invoke((int)(statDetailsSO.Speed + rideItem.Speed + lookItem.Speed));
+    }
+
+
+    public int GetSpeed()
+    {
+        return (int)(statDetailsSO.Speed + rideItem.Speed + lookItem.Speed);
+    }
+
+    public void AddSpeedChangeEvent(Action<int> action)
+    {
+        OnChangeSpeed += action;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class BaseController : MonoBehaviour
 {
     protected Rigidbody2D _rigidbody;
-    [SerializeField] private SpriteRenderer characterRenderer;
+    [SerializeField] protected SpriteRenderer characterRenderer;
 
     protected Vector2 movementDirection = Vector2.zero;
     public Vector2 MovementDirection { get { return movementDirection; } }
@@ -14,8 +14,7 @@ public class BaseController : MonoBehaviour
     public Vector2 LookDirection { get { return lookDirection; } }
 
     protected AnimationHandler animationHandler;
-    [SerializeField] private StatDetailsSO statDetailsSO;
-
+    [SerializeField] protected StatDetailsSO statDetailsSO;
 
     protected virtual void Awake()
     {
@@ -41,7 +40,7 @@ public class BaseController : MonoBehaviour
         Movement(movementDirection);
     }
 
-    private void Movement(Vector2 direction)
+    protected virtual void Movement(Vector2 direction)
     {
         direction = direction * statDetailsSO.Speed;
         _rigidbody.velocity = direction;
